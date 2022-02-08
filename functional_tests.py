@@ -1,6 +1,7 @@
-from time import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+
+import time
 import unittest
 
 
@@ -27,13 +28,14 @@ class NewVisitorTest(unittest.TestCase):
 
         input_box.send_keys('Buy peacock feathers')
 
-        input_box.send_keys(Keys.Enter)
+        input_box.send_keys(Keys.ENTER)
         time.sleep(1)
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_element_by_tag_name('tr')
         self.assertTrue(
-            any(row.text == '1: Buy peacock feathers' for row in rows)
+            any(row.text == '1: Buy peacock feathers' for row in rows),
+            'New to-do item did not appear in table'
         )
 
         self.fail('Finish the test!')
